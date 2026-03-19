@@ -78,6 +78,149 @@ body {
   padding-inline: var(--sp-lg);
 }
 
+/* ── Nav ─────────────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--c-white);
+  border-bottom: 1px solid var(--c-grey-200);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 14px;
+  gap: var(--sp-md);
+}
+
+.nav__logo {
+  font-family: var(--f-mono);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-md);
+  color: var(--c-black);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.nav__logo-mark {
+  width: 10px;
+  height: 10px;
+  background: var(--c-accent);
+  border-radius: var(--r-tight);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+/* Desktop link list */
+.nav__links {
+  display: none;
+  list-style: none;
+  gap: var(--sp-xl);
+  align-items: center;
+}
+@media (min-width: 768px) { .nav__links { display: flex; } }
+
+.nav__links a {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-med);
+  color: var(--c-grey-600);
+  text-decoration: none;
+  transition: color 0.12s;
+}
+.nav__links a:hover { color: var(--c-black); }
+/* React Router NavLink adds .active class */
+.nav__links a.active { color: var(--c-black); font-weight: var(--fw-semi); }
+
+/* Desktop CTAs */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-sm);
+  flex-shrink: 0;
+}
+.nav__actions .btn-ghost { display: none; }
+@media (min-width: 640px) { .nav__actions .btn-ghost { display: inline-flex; } }
+
+/* Burger button */
+.nav__burger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1px solid var(--c-grey-200);
+  border-radius: var(--r-relaxed);
+  color: var(--c-black);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.12s;
+}
+.nav__burger:hover { border-color: var(--c-grey-500); }
+.nav__burger svg   { display: block; }
+
+/* Icon swap via state-driven class on <header> */
+.nav__burger .icon-close { display: none; }
+.nav__burger .icon-open  { display: block; }
+.nav--open .nav__burger .icon-close { display: block; }
+.nav--open .nav__burger .icon-open  { display: none; }
+
+@media (min-width: 768px) { .nav__burger { display: none; } }
+
+/* Mobile drawer */
+.nav__drawer {
+  display: none;
+  overflow: hidden;
+  background: var(--c-white);
+  border-bottom: 1px solid var(--c-grey-200);
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+@media (max-width: 767px) { .nav__drawer { display: block; } }
+.nav--open .nav__drawer { max-height: 480px; }
+
+.nav__drawer-inner {
+  padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav__drawer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px var(--sp-sm);
+  font-family: var(--f-mono);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-med);
+  color: var(--c-grey-700);
+  text-decoration: none;
+  border-radius: var(--r-tight);
+  transition: background 0.1s, color 0.1s;
+  border-bottom: 1px solid var(--c-grey-100);
+}
+.nav__drawer-link:last-of-type { border-bottom: none; }
+.nav__drawer-link:hover { background: var(--c-grey-100); color: var(--c-black); }
+.nav__drawer-link[aria-current="page"] {
+  background: var(--c-grey-100);
+  font-weight: var(--fw-semi);
+  color: var(--c-accent);
+}
+.nav__drawer-link svg { color: var(--c-grey-400); flex-shrink: 0; }
+
+.nav__drawer-cta {
+  margin-top: var(--sp-md);
+  display: flex;
+  gap: var(--sp-sm);
+}
+.nav__drawer-cta .btn { flex: 1; justify-content: center; }
+
 /* ── Buttons ────────────────────────────────────────────────── */
 .btn {
   display: inline-flex;

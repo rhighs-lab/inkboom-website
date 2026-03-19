@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const LINKS = [
   { to: '/docs',            label: 'Docs' },
@@ -48,9 +48,13 @@ export default function Nav() {
           <ul className="nav__links">
             {LINKS.map(({ to, label }) => (
               <li key={to}>
-                <NavLink to={to} aria-current={pathname === to ? 'page' : undefined}>
+                <Link
+                  to={to}
+                  className={pathname === to ? 'active' : undefined}
+                  aria-current={pathname === to ? 'page' : undefined}
+                >
                   {label}
-                </NavLink>
+                </Link>
               </li>
             ))}
             <li>
@@ -108,35 +112,6 @@ export default function Nav() {
         </div>
       </div>
 
-      <style>{`
-        /* Burger icon swap */
-        .nav__burger { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: none; border: 1px solid var(--c-grey-200); border-radius: var(--r-relaxed); color: var(--c-black); cursor: pointer; flex-shrink: 0; transition: border-color .12s; }
-        .nav__burger:hover { border-color: var(--c-grey-500); }
-        .nav__burger svg { display: block; }
-        .nav__burger .icon-close { display: none; }
-        .nav__burger .icon-open  { display: block; }
-        .nav--open .nav__burger .icon-close { display: block; }
-        .nav--open .nav__burger .icon-open  { display: none; }
-        @media (min-width: 768px) { .nav__burger { display: none; } }
-
-        /* Nav drawer */
-        .nav__drawer { display: none; overflow: hidden; background: var(--c-white); border-bottom: 1px solid var(--c-grey-200); max-height: 0; transition: max-height .25s ease; }
-        @media (max-width: 767px) { .nav__drawer { display: block; } }
-        .nav--open .nav__drawer { max-height: 480px; }
-        .nav__drawer-inner { padding: var(--sp-md) var(--sp-lg) var(--sp-lg); display: flex; flex-direction: column; gap: 2px; }
-        .nav__drawer-link { display: flex; align-items: center; justify-content: space-between; padding: 11px var(--sp-sm); font-family: var(--f-mono); font-size: var(--fs-md); font-weight: var(--fw-med); color: var(--c-grey-700); text-decoration: none; border-radius: var(--r-tight); transition: background .1s, color .1s; border-bottom: 1px solid var(--c-grey-100); }
-        .nav__drawer-link:last-of-type { border-bottom: none; }
-        .nav__drawer-link:hover, .nav__drawer-link[aria-current="page"] { background: var(--c-grey-100); color: var(--c-black); }
-        .nav__drawer-link[aria-current="page"] { font-weight: var(--fw-semi); color: var(--c-accent); }
-        .nav__drawer-link svg { color: var(--c-grey-400); flex-shrink: 0; }
-        .nav__drawer-cta { margin-top: var(--sp-md); display: flex; gap: var(--sp-sm); }
-        .nav__drawer-cta .btn { flex: 1; justify-content: center; }
-
-        /* Desktop link active state */
-        .nav__links a.active { color: var(--c-black); font-weight: var(--fw-semi); }
-        .nav__actions .btn-ghost { display: none; }
-        @media (min-width: 640px) { .nav__actions .btn-ghost { display: inline-flex; } }
-      `}</style>
     </header>
   )
 }
